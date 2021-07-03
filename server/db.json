@@ -1,0 +1,157 @@
+{
+  "rights": [
+    {
+      "id": 1,
+      "name": "home",
+      "path": "/home",
+      "title": "首页",
+      "permission": 1
+    },
+    {
+      "id": 2,
+      "name": "user-manage",
+      "path": "/user-manage",
+      "title": "用户",
+      "permission": 1
+    },
+    {
+      "id": 3,
+      "name": "right-manage",
+      "path": "/right-manage",
+      "title": "权限",
+      "permission": 1
+    }
+  ],
+  "children": [
+    {
+      "id": 11,
+      "rightId": 2,
+      "name": "list",
+      "path": "/list",
+      "title": "用户列表",
+      "permission": 1
+    },
+    {
+      "id": 22,
+      "rightId": 3,
+      "name": "right-list",
+      "path": "/right-list",
+      "title": "权限列表",
+      "permission": 1
+    },
+    {
+      "id": 33,
+      "rightId": 3,
+      "name": "role-list",
+      "path": "/role-list",
+      "title": "角色列表",
+      "permission": 1
+    },
+    {
+      "id": 44,
+      "rightId": 2,
+      "name": "bill",
+      "path": "/bill",
+      "title": "单据",
+      "children": [
+        {
+          "id": 166,
+          "name": "create",
+          "path": "/create",
+          "title": "用户创建",
+          "permission": 1
+        }
+      ],
+      "permission": 1
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "name": "超级管理员",
+      "rights": [
+        "/user-manage",
+        "/list",
+        "/bill",
+        "/create",
+        "/right-manage",
+        "/right-list",
+        "/role-list",
+        "/home"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "区域管理员",
+      "rights": [
+        "/home",
+        "/user-manage",
+        "/list",
+        "/bill",
+        "/create",
+        "/role-list"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "区域编辑",
+      "rights": [
+        "/home",
+        "/bill",
+        "/create"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": 22,
+      "region": "全球",
+      "userName": "admin",
+      "roleId": 1,
+      "active": 1
+    },
+    {
+      "id": 33,
+      "region": "亚洲",
+      "userName": "阿测",
+      "roleId": 2,
+      "active": 1
+    },
+    {
+      "id": 44,
+      "region": "广东省",
+      "userName": "大头",
+      "roleId": 3,
+      "active": 1
+    },
+    {
+      "userName": "阿测他哥",
+      "roleId": 2,
+      "region": "阿拉德大陆",
+      "active": 1,
+      "id": 45
+    }
+  ],
+  "regions": [
+    {
+      "id": 1,
+      "name": "广东省"
+    },
+    {
+      "id": 2,
+      "name": "月球"
+    },
+    {
+      "id": 3,
+      "name": "仙女座"
+    },
+    {
+      "id": 4,
+      "name": "天狼星"
+    },
+    {
+      "id": 5,
+      "name": "阿拉德大陆"
+    }
+  ]
+}
