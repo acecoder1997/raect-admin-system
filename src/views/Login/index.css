@@ -1,0 +1,32 @@
+.login {
+    position: relative;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(35, 39, 65);
+}
+
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+.login-card {
+    padding: 20px 40px 40px;
+    width: 380px;
+    background-color: rgba(139, 139, 139, .15);
+}
+
+.login-card-title {
+    color: white;
+    text-align: center;
+}
+
+.login-btn {
+    width: 100%;
+}

@@ -1,9 +1,14 @@
-import React, {useState, forwardRef} from 'react'
-import {Form, Input, Select, Switch} from 'antd'
+import React, {useState, useEffect, forwardRef} from 'react'
+import {Form, Input, Select} from 'antd'
 
 function UserForm(props, ref) {
     const {roles, regions} = props
     const [disabled, setDisabled] = useState(false)
+
+    useEffect(() => {
+        setDisabled(props.isSuperAdmin)
+    }, [props.isSuperAdmin])
+
     const handleRoleChange = (val) => {
         if (val === 1) {
             setDisabled(true)

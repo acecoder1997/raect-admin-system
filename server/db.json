@@ -5,6 +5,7 @@
       "name": "home",
       "path": "/home",
       "title": "首页",
+      "key": "/home",
       "permission": 1
     },
     {
@@ -12,12 +13,14 @@
       "name": "user-manage",
       "path": "/user-manage",
       "title": "用户",
+      "key": "/user-manage",
       "permission": 1
     },
     {
       "id": 3,
       "name": "right-manage",
       "path": "/right-manage",
+      "key": "/right-manage",
       "title": "权限",
       "permission": 1
     }
@@ -28,6 +31,7 @@
       "rightId": 2,
       "name": "list",
       "path": "/list",
+      "key": "/user-manage/list",
       "title": "用户列表",
       "permission": 1
     },
@@ -36,6 +40,7 @@
       "rightId": 3,
       "name": "right-list",
       "path": "/right-list",
+      "key": "/right-manage/right-list",
       "title": "权限列表",
       "permission": 1
     },
@@ -44,20 +49,23 @@
       "rightId": 3,
       "name": "role-list",
       "path": "/role-list",
+      "key": "/right-manage/role-list",
       "title": "角色列表",
-      "permission": 1
+      "permission": 0
     },
     {
       "id": 44,
       "rightId": 2,
       "name": "bill",
       "path": "/bill",
+      "key": "/bill",
       "title": "单据",
       "children": [
         {
           "id": 166,
           "name": "create",
           "path": "/create",
+          "key": "/bill/create",
           "title": "用户创建",
           "permission": 1
         }
@@ -108,28 +116,40 @@
       "region": "全球",
       "userName": "admin",
       "roleId": 1,
-      "active": 1
+      "active": 1,
+      "password": "789456"
     },
     {
       "id": 33,
       "region": "亚洲",
       "userName": "阿测",
       "roleId": 2,
-      "active": 1
+      "active": 1,
+      "password": "123456"
     },
     {
       "id": 44,
       "region": "广东省",
       "userName": "大头",
       "roleId": 3,
-      "active": 1
+      "active": 1,
+      "password": "123456"
     },
     {
       "userName": "阿测他哥",
       "roleId": 2,
       "region": "阿拉德大陆",
       "active": 1,
-      "id": 45
+      "id": 45,
+      "password": "123456"
+    },
+    {
+      "userName": "admin2",
+      "roleId": 1,
+      "region": "",
+      "active": 1,
+      "id": 46,
+      "password": "123456"
     }
   ],
   "regions": [

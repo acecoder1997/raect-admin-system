@@ -40,7 +40,7 @@ function SideMenu(props) {
     const [collapsed, setCollapsed] = useState(false)
     const [openKeys, setOpenKeys] = useState([])
     const [routeList, setRouteList] = useState([])
-
+    const users = JSON.parse(localStorage.getItem('token'))
     useEffect(() => {
         setOpenKeys(props.location.pathname.split('/').filter(name => name))
         getAction('http://localhost:5000/rights?_embed=children').then(res => {
@@ -51,12 +51,16 @@ function SideMenu(props) {
     }, [])
 
 
+    const hasPermission = (route) => {
+        return route.permission && users.role.rights.includes(route.path)
+    }
+
     const renderMenuItems = (routes, parentPath = '', parentName = '') => {
         return routes.map(route => {
             const path = `${parentPath}${route.path}`
             const name = `${parentName}|${route.name}`
             if (!route.permission) return
-            if (route.children && route.children.length) {
+            if (route.children?.length > 0 && hasPermission(route)) {
                 return (
                     <SubMenu key={route.name} title={route.title} icon={route.icon} onTitleClick={() => {
                         setOpenKeys(name.split('|').filter(name => name))

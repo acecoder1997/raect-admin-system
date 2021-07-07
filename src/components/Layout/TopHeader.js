@@ -1,26 +1,34 @@
 import React, {useState} from 'react'
+import {withRouter} from 'react-router-dom'
 import {Layout, Avatar, Menu, Dropdown} from "antd";
 import {
     MehOutlined,
     MenuFoldOutlined,
-    MenuUnfoldOutlined
+    MenuUnfoldOutlined,
+    LogoutOutlined,
+    InfoCircleOutlined,
+    UserOutlined
 } from '@ant-design/icons'
 
 const {Header} = Layout
-export default function TopHeader() {
+const TopHeader = (props) => {
     const [collapsed, setCollapsed] = useState(false)
+    const users = JSON.parse(localStorage.getItem('token'))
 
     let menu = (
         <Menu>
-            <Menu.ItemGroup title="Group title">
-                <Menu.Item key={1}>1st menu item</Menu.Item>
-                <Menu.Item key={2}>2nd menu item</Menu.Item>
-            </Menu.ItemGroup>
+            <Menu.Item key='info' icon={<UserOutlined />}>{users.role.name}</Menu.Item>
+            <Menu.Item key='info' icon={<InfoCircleOutlined/>}>用户资料</Menu.Item>
+            <Menu.Item key='logout' danger icon={<LogoutOutlined/>} onClick={logOut}>退出</Menu.Item>
         </Menu>
     )
 
     function toggle() {
         setCollapsed(!collapsed)
+    }
+
+    function logOut() {
+        props.history.replace('/login')
     }
 
     return (
@@ -36,10 +44,12 @@ export default function TopHeader() {
                     <div style={{cursor: 'pointer'}}>
                         <Avatar size={34} icon={<MehOutlined/>}
                                 style={{backgroundColor: '#00a2ae', verticalAlign: 'middle', marginRight: 5}}/>
-                        <span>阿测</span>
+                        <span>{users.userName}</span>
                     </div>
                 </Dropdown>
             </div>
         </Header>
     )
 }
+
+export default withRouter(TopHeader)

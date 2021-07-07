@@ -50,7 +50,7 @@ export default function RightList() {
         const permission = item.permission ? 0 : 1
         item.permission = permission
         setDataSource([...dataSource])
-        const api = item.rightId ? 'childrens' : 'rights'
+        const api = item.rightId ? 'children' : 'rights'
         patchAction(`http://localhost:5000/${api}/${item.id}`, {permission}).then(res => {
             console.log(res);
         }).catch(err => {
