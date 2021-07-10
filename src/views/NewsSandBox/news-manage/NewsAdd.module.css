@@ -1,0 +1,16 @@
+.hidden {
+    display: none;
+}
+
+.actionGroup{
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.steps{
+    margin-bottom: 30px;
+}
+
+.actionGroup button{
+    margin-left: 5px;
+}

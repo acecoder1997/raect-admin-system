@@ -23,11 +23,27 @@
       "key": "/right-manage",
       "title": "权限",
       "permission": 1
+    },
+    {
+      "id": 4,
+      "name": "news-manage",
+      "path": "/news-manage",
+      "key": "/news-manage",
+      "title": "新闻",
+      "permission": 1
+    },
+    {
+      "id": 5,
+      "name": "audit-manage",
+      "path": "/audit-manage",
+      "key": "/audit-manage",
+      "title": "审核",
+      "permission": 1
     }
   ],
   "children": [
     {
-      "id": 11,
+      "id": 1,
       "rightId": 2,
       "name": "list",
       "path": "/list",
@@ -36,7 +52,7 @@
       "permission": 1
     },
     {
-      "id": 22,
+      "id": 2,
       "rightId": 3,
       "name": "right-list",
       "path": "/right-list",
@@ -45,16 +61,16 @@
       "permission": 1
     },
     {
-      "id": 33,
+      "id": 3,
       "rightId": 3,
       "name": "role-list",
       "path": "/role-list",
       "key": "/right-manage/role-list",
       "title": "角色列表",
-      "permission": 0
+      "permission": 1
     },
     {
-      "id": 44,
+      "id": 4,
       "rightId": 2,
       "name": "bill",
       "path": "/bill",
@@ -71,6 +87,69 @@
         }
       ],
       "permission": 1
+    },
+    {
+      "id": 5,
+      "rightId": 4,
+      "name": "add",
+      "path": "/add",
+      "key": "/news-manage/add",
+      "title": "新闻编辑",
+      "permission": 1
+    },
+    {
+      "id": 6,
+      "rightId": 4,
+      "name": "draft",
+      "path": "/draft",
+      "key": "/news-manage/draft",
+      "title": "草稿箱",
+      "permission": 1
+    },
+    {
+      "id": 7,
+      "rightId": 4,
+      "name": "category",
+      "path": "/category",
+      "key": "/news-manage/category",
+      "title": "新闻分类",
+      "permission": 1
+    },
+    {
+      "id": 8,
+      "rightId": 4,
+      "name": "preview",
+      "path": "/preview",
+      "key": "/news-manage/preview/:id",
+      "title": "新闻预览",
+      "routerPermission": 1
+    },
+    {
+      "id": 9,
+      "rightId": 4,
+      "name": "preview",
+      "path": "/preview",
+      "key": "/news-manage/update/:id",
+      "title": "新闻更新",
+      "routerPermission": 1
+    },
+    {
+      "id": 11,
+      "rightId": 5,
+      "name": "audit",
+      "path": "/audit",
+      "key": "/audit-manage/audit",
+      "title": "审核新闻",
+      "permission": 1
+    },
+    {
+      "id": 10,
+      "rightId": 5,
+      "name": "list",
+      "path": "/list",
+      "key": "/audit-manage/list",
+      "title": "审核列表",
+      "permission": 1
     }
   ],
   "roles": [
@@ -79,13 +158,22 @@
       "name": "超级管理员",
       "rights": [
         "/user-manage",
-        "/list",
         "/bill",
-        "/create",
         "/right-manage",
-        "/right-list",
-        "/role-list",
-        "/home"
+        "/home",
+        "/user-manage/list",
+        "/right-manage/right-list",
+        "/right-manage/role-list",
+        "/bill/create",
+        "/news-manage/add",
+        "/news-manage/draft",
+        "/news-manage/category",
+        "/news-manage/preview/:id",
+        "/news-manage/update/:id",
+        "/news-manage",
+        "/audit-manage",
+        "/audit-manage/audit",
+        "/audit-manage/list"
       ]
     },
     {
@@ -94,10 +182,18 @@
       "rights": [
         "/home",
         "/user-manage",
-        "/list",
         "/bill",
-        "/create",
-        "/role-list"
+        "/user-manage/list",
+        "/bill/create",
+        "/news-manage",
+        "/news-manage/add",
+        "/news-manage/draft",
+        "/news-manage/category",
+        "/news-manage/preview/:id",
+        "/news-manage/update/:id",
+        "/audit-manage",
+        "/audit-manage/audit",
+        "/audit-manage/list"
       ]
     },
     {
@@ -106,7 +202,14 @@
       "rights": [
         "/home",
         "/bill",
-        "/create"
+        "/bill/create",
+        "/news-manage",
+        "/news-manage/add",
+        "/news-manage/draft",
+        "/news-manage/category",
+        "/news-manage/preview/:id",
+        "/news-manage/update/:id",
+        "/audit-manage/list"
       ]
     }
   ],
@@ -172,6 +275,80 @@
     {
       "id": 5,
       "name": "阿拉德大陆"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "label": "时事新闻",
+      "value": 1
+    },
+    {
+      "id": 2,
+      "label": "环球经济",
+      "value": 2
+    },
+    {
+      "id": 3,
+      "label": "科学技术",
+      "value": 3
+    },
+    {
+      "id": 4,
+      "label": "军事世界",
+      "value": 4
+    }
+  ],
+  "types": [
+    {
+      "id": 1,
+      "label": "时事新闻",
+      "value": 1
+    },
+    {
+      "id": 2,
+      "label": "环球经济",
+      "value": 2
+    },
+    {
+      "id": 3,
+      "label": "科学技术",
+      "value": 3
+    },
+    {
+      "id": 4,
+      "label": "军事世界",
+      "value": 4
+    }
+  ],
+  "news": [
+    {
+      "title": "2.2 首个里程碑版本，版本重构大。",
+      "typeId": 3,
+      "content": "<p>2121</p>\n",
+      "region": "全球",
+      "author": "admin",
+      "roleId": 1,
+      "auditState": 1,
+      "publishState": 0,
+      "createTime": 1625890178577,
+      "star": 0,
+      "view": 0,
+      "id": 1
+    },
+    {
+      "title": "WangEditor 1.2",
+      "typeId": 3,
+      "content": "<blockquote style=\"margin-left:0px;\"><span style=\"background-color: rgb(241,241,241);font-size: 14px;\">争做国内使用体验Z好的开源 Web 富文本编辑器！</span></blockquote>\n<h1 style=\"margin-left:0px;\"><span style=\"color: inherit;font-size: 24px;font-family: inherit;\"><strong>为何选择 wangEditor</strong></span></h1>\n<ul>\n<li style=\"margin-left:0px;\">简洁、轻量级、<a href=\"https://www.wangeditor.com/doc/\" target=\"_self\"><span style=\"color: rgb(66,139,202);background-color: transparent;\">文档</span></a>齐全</li>\n<li style=\"margin-left:0px;\">万星项目 <a href=\"https://github.com/wangeditor-team/wangEditor/releases\" target=\"_self\"><span style=\"color: rgb(66,139,202);background-color: transparent;\">Github Star 1w+</span></a></li>\n<li style=\"margin-left:0px;\">npm 周下载量 1w+</li>\n<li style=\"margin-left:0px;\">CDN 月下载量百万+（来自 <a href=\"https://www.jsdelivr.com/package/npm/wangeditor\" target=\"_self\"><span style=\"color: rgb(66,139,202);background-color: transparent;\">jsdelivr</span></a>）</li>\n<li style=\"margin-left:0px;\">QQ 群及时答疑</li>\n<li style=\"margin-left:0px;\"><a href=\"https://www.wangeditor.com/doc/#%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98\" target=\"_self\"><span style=\"color: rgb(66,139,202);background-color: transparent;\">开源团队</span></a>维护，非个人单兵作战</li>\n</ul>\n<h1 style=\"margin-left:0px;\"><span style=\"color: inherit;font-size: 24px;font-family: inherit;\"><strong>初见</strong></span></h1>\n<p style=\"margin-left:0px;\"><span style=\"font-size: 16px;\">npm 安装</span> <span style=\"font-size: 16px;\"><code>npm i wangeditor --save</code></span> <span style=\"font-size: 16px;\">，几行代码即可创建一个编辑器。</span></p>\n<pre style=\"margin-left:0px;\"><span style=\"color: rgb(51,51,51);background-color: rgb(245,245,245);font-size: 13px;font-family: Menlo, Monaco, Consolas, \"Courier New\", monospace;\"><code>import E from 'wangeditor'<br>const editor = new E('#div1')<br>editor.create()</code></span></pre>\n<p style=\"margin-left:0px;\"><span style=\"font-size: 16px;\">更多使用配置，请阅读</span><a href=\"https://www.wangeditor.com/doc/\" target=\"_self\"><span style=\"color: rgb(66,139,202);background-color: transparent;font-size: 16px;\">使用文档</span></a><span style=\"font-size: 16px;\">。</span></p>\n<h1 style=\"margin-left:0px;\"><span style=\"color: inherit;font-size: 24px;font-family: inherit;\"><strong>demo</strong></span></h1>\n<p style=\"margin-left:0px;\"><span style=\"font-size: 16px;\">在线体验 demo 可到</span> <a href=\"https://codepen.io/collection/DNmPQV\" target=\"_self\"><span style=\"color: rgb(66,139,202);background-color: transparent;font-size: 16px;\">codepen.io/collection/DNmPQV</span></a> <span style=\"font-size: 16px;\">。</span></p>\n<p style=\"margin-left:0px;\"><span style=\"font-size: 16px;\">注意，如果打不开，可以去查看</span> <a href=\"https://github.com/wangeditor-team/wangEditor/tree/master/examples\" target=\"_self\"><span style=\"color: rgb(66,139,202);background-color: transparent;font-size: 16px;\">github examples</span></a> <span style=\"font-size: 16px;\">的源码。</span></p>\n<h1 style=\"margin-left:0px;\"><span style=\"color: inherit;font-size: 24px;font-family: inherit;\"><strong>浏览器兼容性</strong></span></h1>\n<ul>\n<li style=\"margin-left:0px;\">兼容主流 PC 浏览器，IE11+</li>\n<li style=\"margin-left:0px;\">不支持移动端和 ipad</li>\n</ul>\n<h1 style=\"margin-left:0px;\"><span style=\"color: inherit;font-size: 24px;font-family: inherit;\"><strong>遇到问题</strong></span></h1>\n<ul>\n<li style=\"margin-left:0px;\">加入 QQ 群：164999061，901247714(人已满)，710646022(人已满)</li>\n<li style=\"margin-left:0px;\"><a href=\"https://github.com/wangeditor-team/wangEditor/issues\" target=\"_blank\"><span style=\"color: rgb(66,139,202);background-color: transparent;\">提交问题和建议</span></a></li>\n</ul>\n<h1 style=\"margin-left:0px;\"><span style=\"color: inherit;font-size: 24px;font-family: inherit;\"><strong>贡献代码</strong></span></h1>\n<p style=\"margin-left:0px;\"><span style=\"font-size: 16px;\">欢迎非团队成员贡献代码，提交 Pull Request，请一定参考</span><a href=\"https://github.com/wangeditor-team/wangEditor/blob/master/docs/contribution.md\" target=\"_blank\"><span style=\"color: rgb(66,139,202);background-color: transparent;font-size: 16px;\">贡献代码流程</span></a><span style=\"font-size: 16px;\">。</span></p>\n<h1 style=\"margin-left:0px;\"><span style=\"color: inherit;font-size: 24px;font-family: inherit;\"><strong>谁在维护</strong></span></h1>\n<p style=\"margin-left:0px;\"><span style=\"font-size: 16px;\">wangEditor 现有一个开源团队在维护，团队可以保证答疑、bug 修复和迭代效率。</span></p>\n<p style=\"margin-left:0px;\"><a href=\"https://www.wangeditor.com/doc/#%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98\" target=\"_self\"><span style=\"color: rgb(66,139,202);background-color: transparent;font-size: 16px;\">查看开发团队，或想加入开发团队</span></a></p>\n<h1 style=\"margin-left:0px;\"><span style=\"color: inherit;font-size: 24px;font-family: inherit;\"><strong>为我们点赞</strong></span></h1>\n<p style=\"margin-left:0px;\"><span style=\"font-size: 16px;\">如果你感觉有收获，欢迎给我打赏，以激励我们更多输出优质开源内容。</span></p>\n<p style=\"margin-left:0px;\"></p>\n<img src=\"https://www.wangeditor.com/imgs/ali-pay.jpeg\" alt=\"\" style=\"height: ;width: \"/>\n<img src=\"https://www.wangeditor.com/imgs/wechat-pay.jpeg\" alt=\"\" style=\"height: ;width: \"/>\n<p style=\"margin-left:0px;\"><br>&nbsp;</p>\n",
+      "region": "全球",
+      "author": "admin",
+      "roleId": 1,
+      "auditState": 1,
+      "publishState": 0,
+      "createTime": 1625900441317,
+      "star": 0,
+      "view": 0,
+      "id": 2
     }
   ]
 }

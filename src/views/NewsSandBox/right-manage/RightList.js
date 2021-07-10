@@ -7,16 +7,14 @@ export default function RightList() {
     const [dataSource, setDataSource] = useState([])
     const columns = [{
         title: '菜单名称',
-        key: 'title',
         dataIndex: 'title',
     }, {
         title: '路径',
-        key: 'path',
-        dataIndex: 'path',
+        key: 'key',
+        dataIndex: 'key',
         render: path => <Tag color='orange'>{path}</Tag>
     }, {
         title: '启用',
-        key: 'path',
         dataIndex: 'permission',
         render: (val, item) => <Switch checked={val} onChange={() => switchEnabled(item)}
                                        loading={item.loading}></Switch>
@@ -89,7 +87,7 @@ export default function RightList() {
 
     return (
         <div>
-            <Table rowKey="id" columns={columns} dataSource={dataSource}></Table>
+            <Table rowKey="key" columns={columns} dataSource={dataSource}></Table>
         </div>
     )
 }

@@ -13,7 +13,7 @@ class Request {
 
     createAxios() {
         this.axios = new axios.create({
-            // baseURL: window._CONFIG['baseUrl'],
+            baseURL: 'http://localhost:5000',
             timeout: 2 * 60 * 1000 // 请求超时时间
         })
     }

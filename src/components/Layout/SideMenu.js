@@ -5,44 +5,14 @@ import {Layout, Menu} from "antd";
 
 const {Sider} = Layout
 const {SubMenu} = Menu
-// const routes = [{
-//     name: 'home',
-//     path: '/home',
-//     icon: <LaptopOutlined/>,
-//     meta: {title: '首页'}
-// }, {
-//     name: 'user-manage',
-//     path: '/user-manage',
-//     icon: <GlobalOutlined/>,
-//     meta: {title: '用户'},
-//     children: [{
-//         name: 'list',
-//         path: '/list',
-//         meta: {title: '用户列表'},
-//     }]
-// }, {
-//     name: 'right-manage',
-//     path: '/right-manage',
-//     icon: <FolderOpenOutlined/>,
-//     meta: {title: '权限'},
-//     children: [{
-//         name: 'right-list',
-//         path: '/right/list',
-//         meta: {title: '权限列表'},
-//     }, {
-//         name: 'role-list',
-//         path: '/role/list',
-//         meta: {title: '角色列表'},
-//     }]
-// }]
 
 function SideMenu(props) {
     const [collapsed, setCollapsed] = useState(false)
     const [openKeys, setOpenKeys] = useState([])
     const [routeList, setRouteList] = useState([])
-    const users = JSON.parse(localStorage.getItem('token'))
+    const [users] = useState(JSON.parse(localStorage.getItem('token')))
+
     useEffect(() => {
-        setOpenKeys(props.location.pathname.split('/').filter(name => name))
         getAction('http://localhost:5000/rights?_embed=children').then(res => {
             setRouteList(res)
         }).catch(err => {
@@ -50,29 +20,28 @@ function SideMenu(props) {
         })
     }, [])
 
+    useEffect(() => {
+        const defaultOpenKeys = ['/' + props.location.pathname.split('/')[1], props.location.pathname]
+        setOpenKeys(defaultOpenKeys)
+    }, [props.location.pathname])
 
     const hasPermission = (route) => {
-        return route.permission && users.role.rights.includes(route.path)
+        return route.permission && users.role.rights.includes(route.key)
     }
 
-    const renderMenuItems = (routes, parentPath = '', parentName = '') => {
+    const renderMenuItems = (routes) => {
         return routes.map(route => {
-            const path = `${parentPath}${route.path}`
-            const name = `${parentName}|${route.name}`
             if (!route.permission) return
             if (route.children?.length > 0 && hasPermission(route)) {
                 return (
-                    <SubMenu key={route.name} title={route.title} icon={route.icon} onTitleClick={() => {
-                        setOpenKeys(name.split('|').filter(name => name))
-                    }}>
-                        {renderMenuItems(route.children, path, name)}
+                    <SubMenu key={route.key} title={route.title} icon={route.icon}>
+                        {renderMenuItems(route.children)}
                     </SubMenu>
                 )
             } else {
                 return (
-                    <Menu.Item key={route.name} icon={route.icon} onClick={() => {
-                        props.history.push(path)
-                        setOpenKeys(name.split('|').filter(name => name))
+                    <Menu.Item key={route.key} icon={route.icon} onClick={() => {
+                        props.history.push(route.key)
                     }}>
                         {route.title}
                     </Menu.Item>
@@ -80,11 +49,19 @@ function SideMenu(props) {
             }
         })
     }
+
+    const onOpenChange = (keys) => {
+        keys.length && setOpenKeys([keys[keys.length - 1]])
+    }
+
+    const selectedKeys = [props.location.pathname]
     return (
         <Sider trigger={null} collapsible collapsed={collapsed}>
             <div className="logo" onClick={() => setCollapsed(!collapsed)}>阿测后台系统</div>
-            <Menu theme='dark' selectedKeys={openKeys}
-                  openKeys={openKeys} mode="inline">{renderMenuItems(routeList)}</Menu>
+            <Menu theme='dark' selectedKeys={selectedKeys} openKeys={openKeys} onOpenChange={onOpenChange}
+                  mode="inline">
+                {renderMenuItems(routeList)}
+            </Menu>
         </Sider>
     )
 }

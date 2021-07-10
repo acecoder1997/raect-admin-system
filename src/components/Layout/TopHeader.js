@@ -13,11 +13,11 @@ import {
 const {Header} = Layout
 const TopHeader = (props) => {
     const [collapsed, setCollapsed] = useState(false)
-    const users = JSON.parse(localStorage.getItem('token'))
+    const [users] = useState(JSON.parse(localStorage.getItem('token')))
 
     let menu = (
         <Menu>
-            <Menu.Item key='info' icon={<UserOutlined />}>{users.role.name}</Menu.Item>
+            <Menu.Item key='role' icon={<UserOutlined />}>{users.role.name}</Menu.Item>
             <Menu.Item key='info' icon={<InfoCircleOutlined/>}>用户资料</Menu.Item>
             <Menu.Item key='logout' danger icon={<LogoutOutlined/>} onClick={logOut}>退出</Menu.Item>
         </Menu>

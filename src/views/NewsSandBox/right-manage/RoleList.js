@@ -8,7 +8,7 @@ export default function RoleList() {
     const [currRole, setCurrRole] = useState({rights: []})
     const [rightList, setRightList] = useState([])
     const [dataSource, setDataSource] = useState([])
-    const columns = [{
+    const [columns, setColumns] = useState([{
         title: '角色名称',
         dataIndex: 'name'
     }, {
@@ -23,13 +23,14 @@ export default function RoleList() {
                 <Tooltip title="编辑">
                     <Button type="primary" shape="circle" icon={<UnorderedListOutlined/>}
                             onClick={() => {
+                                console.log(item);
                                 setCurrRole(item)
                                 setIsRoleModalShow(true)
                             }}/>
                 </Tooltip>
             </>
         ),
-    }]
+    }])
 
     useEffect(() => {
         fetchRoleList()
@@ -43,13 +44,7 @@ export default function RoleList() {
     }
     const fetchRightList = () => {
         getAction('http://localhost:5000/rights?_embed=children').then(res => {
-            const setKey = (list) => {
-                list.forEach(l => {
-                    l.key = l.path
-                    if (l.children) setKey(l.children)
-                })
-            }
-            setKey(res)
+            console.log(res);
             setRightList(res)
         })
     }
@@ -71,7 +66,6 @@ export default function RoleList() {
             setIsRoleModalShow(false)
             fetchRoleList()
         })
-
     }
 
     const handleCancel = () => {
@@ -85,7 +79,7 @@ export default function RoleList() {
         <div>
             <Table rowKey='id' columns={columns} dataSource={dataSource}></Table>
             <Modal title="权限分配" destroyOnClose visible={isRoleModalShow} onOk={handleOk} onCancel={handleCancel}>
-                <Tree checkable checkedKeys={currRole.rights} treeData={rightList} onCheck={handleCheck}></Tree>
+                <Tree checkable  checkedKeys={currRole.rights} treeData={rightList} onCheck={handleCheck}></Tree>
             </Modal>
         </div>
     )

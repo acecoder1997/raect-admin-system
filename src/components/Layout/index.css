@@ -23,4 +23,5 @@
 
 .site-layout .site-layout-background {
     background: #fff;
+    overflow: hidden auto;
 }
