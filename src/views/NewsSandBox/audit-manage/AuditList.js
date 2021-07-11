@@ -61,14 +61,15 @@ function AuditList(props) {
 
     const handleStateChange = ( item) => {
         patchAction(`/news/${item.id}`, {auditState: 0}).then(res => {
-            console.log(res);
+            fetchList()
         })
     }
     const handlePublish = (item) => {
         patchAction(`/news/${item.id}`, {publishState: 2}).then(res => {
-            console.log(res);
+            fetchList()
         })
     }
+    
     useEffect(() => {
         fetchList()
     }, [])

@@ -2,12 +2,11 @@ import React, {useState, useEffect} from 'react'
 import {withRouter} from 'react-router-dom'
 import {getAction} from "../../api";
 import {Layout, Menu} from "antd";
-
+import { connect } from 'react-redux';
 const {Sider} = Layout
 const {SubMenu} = Menu
 
 function SideMenu(props) {
-    const [collapsed, setCollapsed] = useState(false)
     const [openKeys, setOpenKeys] = useState([])
     const [routeList, setRouteList] = useState([])
     const [users] = useState(JSON.parse(localStorage.getItem('token')))
@@ -56,8 +55,8 @@ function SideMenu(props) {
 
     const selectedKeys = [props.location.pathname]
     return (
-        <Sider trigger={null} collapsible collapsed={collapsed}>
-            <div className="logo" onClick={() => setCollapsed(!collapsed)}>阿测后台系统</div>
+        <Sider trigger={null} collapsible collapsed={props.isCollapsed}>
+            <div className="logo">阿测后台系统</div>
             <Menu theme='dark' selectedKeys={selectedKeys} openKeys={openKeys} onOpenChange={onOpenChange}
                   mode="inline">
                 {renderMenuItems(routeList)}
@@ -66,4 +65,6 @@ function SideMenu(props) {
     )
 }
 
-export default withRouter(SideMenu)
+export default connect(({CollapsedReducer:{isCollapsed}})=>{
+    return {isCollapsed}
+})(withRouter(SideMenu))

@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {withRouter} from 'react-router-dom'
+import { connect } from 'react-redux';
 import {Layout, Avatar, Menu, Dropdown} from "antd";
 import {
     MehOutlined,
@@ -12,29 +13,29 @@ import {
 
 const {Header} = Layout
 const TopHeader = (props) => {
-    const [collapsed, setCollapsed] = useState(false)
-    const [users] = useState(JSON.parse(localStorage.getItem('token')))
+    const users = JSON.parse(localStorage.getItem('token')) || {}
 
     let menu = (
         <Menu>
-            <Menu.Item key='role' icon={<UserOutlined />}>{users.role.name}</Menu.Item>
+            <Menu.Item key='role' icon={<UserOutlined />}>{users?.role?.name}</Menu.Item>
             <Menu.Item key='info' icon={<InfoCircleOutlined/>}>用户资料</Menu.Item>
             <Menu.Item key='logout' danger icon={<LogoutOutlined/>} onClick={logOut}>退出</Menu.Item>
         </Menu>
     )
 
     function toggle() {
-        setCollapsed(!collapsed)
+        props.changeCollapsed(!props.isCollapsed)
     }
 
     function logOut() {
-        props.history.replace('/login')
+        localStorage.removeItem('token')
+        setTimeout(() => props.history.replace('/login'))
     }
 
     return (
         <Header className="site-layout-background" style={{padding: '0 10px'}}>
             {
-                React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                React.createElement(props.isCollapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                     className: 'trigger',
                     onClick: toggle
                 })
@@ -52,4 +53,11 @@ const TopHeader = (props) => {
     )
 }
 
-export default withRouter(TopHeader)
+// 组件接受props
+function mapStateToProps({CollapsedReducer:{isCollapsed}}){
+    return {isCollapsed}
+}
+
+export default connect(mapStateToProps,{
+    changeCollapsed:(data)=>({type:'change_collapsed',data})
+})(withRouter(TopHeader))

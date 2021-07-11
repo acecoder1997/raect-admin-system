@@ -5,11 +5,20 @@ import {Layout} from "antd";
 import './index.css'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import { withRouter } from 'react-router-dom';
 
 const {Content} = Layout
-export default function AceLayout(props) {
+ function AceLayout(props) {
     NProgress.start()
 
+    const checkToken = ()=>{
+        const token = localStorage.getItem('token')
+        if(!token){
+            NProgress.done()
+            props.history.push('/login')
+        }
+    }
+    checkToken()
     useEffect(() => {
         NProgress.done()
     })
@@ -28,3 +37,5 @@ export default function AceLayout(props) {
         </Layout>
     )
 }
+
+export default withRouter(AceLayout)
